@@ -15,8 +15,6 @@ public class Game {
     private boolean isGameOver;
     private BeginGameState beginState;
     private LaunchGameState launchState;
-    private WinGameState winState;
-    private LoseGameState loseState;
     private QuitGameState quitState;
 
     private GameState previousState;
@@ -28,8 +26,6 @@ public class Game {
         isGameOver = false;
         beginState = new BeginGameState(this);
         launchState = new LaunchGameState(this);
-        winState = new WinGameState(this);
-        loseState = new LoseGameState(this);
         quitState = new QuitGameState(this);
         state = beginState;
     }
@@ -73,14 +69,6 @@ public class Game {
 
     public GameState getPreviousState() {
         return previousState;
-    }
-
-    public WinGameState getWinState() {
-        return winState;
-    }
-
-    public LoseGameState getLoseState() {
-        return loseState;
     }
 
     public List<String> getMistakes() {

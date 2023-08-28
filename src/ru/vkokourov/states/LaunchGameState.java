@@ -42,12 +42,14 @@ public class LaunchGameState implements GameState {
         if (word.isGuessLetter(enter)) {
             word.addGuessLetter(enter);
             if (word.isGuess()) {
-                game.setState(game.getWinState());
+                System.out.println("Вы выиграли! Сыграйте еще!");
+                game.setState(game.getBeginState());
             }
         } else {
             game.getMistakes().add(enter);
             if (game.isLastTry()) {
-                game.setState(game.getLoseState());
+                System.out.println("К сожалению Вы проиграли. Попробуйте еще раз!");
+                game.setState(game.getBeginState());
             }
         }
     }
