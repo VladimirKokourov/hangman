@@ -10,7 +10,7 @@ public class Gallows {
     public static final String MIDDLE_FOUR = "|    O\n|   /|\\\n|";
     public static final String MIDDLE_FIVE = "|    O\n|   /|\\\n|   /";
     public static final String MIDDLE_SIX = "|    O\n|   /|\\\n|   / \\";
-    public static final String DOWN = "|\n|\n|\n|_________";
+    public static final String DOWN = "|\n|\n|_________";
 
     public void draw(int numOfMistakes) {
         System.out.println(UP);

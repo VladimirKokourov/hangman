@@ -6,15 +6,15 @@ import java.util.List;
 public class HiddenWord {
     public static final String HIDDEN = "*";
 
-    private List<String> letters;
-    private List<Integer> numbersOfGuessLetters;
+    private final List<String> letters;
+    private final List<Integer> numbersOfGuessLetters;
 
     public HiddenWord() {
         this.letters = List.of("цивилизация".split(""));
         numbersOfGuessLetters = new ArrayList<>();
     }
 
-    public void draw() {
+    public void print() {
         for (int i = 0; i < letters.size(); i++) {
             if (numbersOfGuessLetters.contains(i)) {
                 System.out.print(letters.get(i));

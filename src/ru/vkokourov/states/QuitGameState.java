@@ -15,7 +15,7 @@ public class QuitGameState implements GameState {
 
     @Override
     public void printMessage() {
-        System.out.print("Вы уверены, что хотите выйти? ");
+        System.out.println("Вы уверены, что хотите выйти? ");
     }
 
     @Override

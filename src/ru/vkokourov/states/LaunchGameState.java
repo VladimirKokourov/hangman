@@ -10,9 +10,9 @@ import java.util.Scanner;
 public class LaunchGameState implements GameState {
 
     private final Game game;
+    private final Gallows gallows;
 
     private HiddenWord word;
-    private Gallows gallows;
 
     public LaunchGameState(Game game) {
         this.game = game;
@@ -21,11 +21,12 @@ public class LaunchGameState implements GameState {
 
     @Override
     public void printMessage() {
-        if (word == null) {
+        if (word == null || word.isGuess() || game.isLastTry()) {
             word = new HiddenWord();
+            game.getMistakes().clear();
         }
         gallows.draw(game.getNumOfMistakes());
-        word.draw();
+        word.print();
         if (game.getNumOfMistakes() > 0) {
             System.out.printf("Вы уже пробовали: %s.\n", game.getMistakes().toString());
         }

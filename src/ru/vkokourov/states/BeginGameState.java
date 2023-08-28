@@ -6,6 +6,7 @@ import ru.vkokourov.Game;
 import ru.vkokourov.utils.Validator;
 
 public class BeginGameState implements GameState {
+
     private final Game game;
 
     public BeginGameState(Game game) {
@@ -14,7 +15,7 @@ public class BeginGameState implements GameState {
 
     @Override
     public void printMessage() {
-        System.out.print("Начать игру? (y/n)");
+        System.out.println("Начать игру?");
     }
 
     @Override
