@@ -5,30 +5,34 @@ import ru.vkokourov.Game;
 import ru.vkokourov.HiddenWord;
 import ru.vkokourov.utils.Validator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class LaunchGameState implements GameState {
+    private static final int NUMBER_OF_TRIES = 6;
 
     private final Game game;
     private final Gallows gallows;
+    private final List<String> mistakes;
 
     private HiddenWord word;
 
     public LaunchGameState(Game game) {
         this.game = game;
         gallows = new Gallows();
+        mistakes = new ArrayList<>();
     }
 
     @Override
     public void printMessage() {
-        if (word == null || word.isGuess() || game.isLastTry()) {
+        if (word == null || word.isGuess() || isLastTry()) {
             word = new HiddenWord();
-            game.getMistakes().clear();
+            mistakes.clear();
         }
-        gallows.draw(game.getNumOfMistakes());
-        word.print();
-        if (game.getNumOfMistakes() > 0) {
-            System.out.printf("Вы уже пробовали: %s.\n", game.getMistakes().toString());
+        printGallowsAndWord();
+        if (getNumOfMistakes() > 0) {
+            System.out.printf("Вы уже пробовали: %s.\n", mistakes);
         }
     }
 
@@ -41,17 +45,41 @@ public class LaunchGameState implements GameState {
         } while (!Validator.isValidYesOrNo(enter));
 
         if (word.isGuessLetter(enter)) {
-            word.addGuessLetter(enter);
+            if (mistakes.contains(enter)) {
+                System.out.printf("Буква %s уже была", enter);
+            } else {
+                word.addGuessLetter(enter);
+            }
             if (word.isGuess()) {
+                printGallowsAndWord();
                 System.out.println("Вы выиграли! Сыграйте еще!");
                 game.setState(game.getBeginState());
             }
         } else {
-            game.getMistakes().add(enter);
-            if (game.isLastTry()) {
+            if (mistakes.contains(enter)) {
+                System.out.printf("Буква %s уже была", enter);
+            } else {
+                mistakes.add(enter);
+            }
+            if (isLastTry()) {
+                printGallowsAndWord();
                 System.out.println("К сожалению Вы проиграли. Попробуйте еще раз!");
                 game.setState(game.getBeginState());
             }
         }
     }
+
+    private void printGallowsAndWord() {
+        gallows.draw(getNumOfMistakes());
+        word.print();
+    }
+
+    private int getNumOfMistakes() {
+        return mistakes.size();
+    }
+
+    public boolean isLastTry() {
+        return getNumOfMistakes() == NUMBER_OF_TRIES;
+    }
+
 }

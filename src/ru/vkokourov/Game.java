@@ -7,26 +7,23 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Game {
-    private static final int NUMBER_OF_TRIES = 6;
 
     private Scanner scanner;
 
-    private List<String> mistakes;
-    private boolean isGameOver;
-    private BeginGameState beginState;
-    private LaunchGameState launchState;
-    private QuitGameState quitState;
+    private final BeginGameState beginState;
+    private final LaunchGameState launchState;
+    private final QuitGameState quitState;
 
+    private boolean isGameOver;
     private GameState previousState;
     private GameState state;
 
     public Game() {
         this.scanner = new Scanner(System.in);
-        mistakes = new ArrayList<>();
-        isGameOver = false;
         beginState = new BeginGameState(this);
         launchState = new LaunchGameState(this);
         quitState = new QuitGameState(this);
+        isGameOver = false;
         state = beginState;
     }
 
@@ -45,10 +42,6 @@ public class Game {
         state.scanEnter(scanner);
     }
 
-    public boolean isLastTry() {
-        return getNumOfMistakes() == NUMBER_OF_TRIES;
-    }
-
     public void setState(GameState state) {
         previousState = this.state;
         this.state = state;
@@ -56,10 +49,6 @@ public class Game {
 
     public boolean isGameOver() {
         return isGameOver;
-    }
-
-    public int getNumOfMistakes() {
-        return mistakes.size();
     }
 
     public BeginGameState getBeginState() {
@@ -76,10 +65,6 @@ public class Game {
 
     public GameState getPreviousState() {
         return previousState;
-    }
-
-    public List<String> getMistakes() {
-        return mistakes;
     }
 
     public void setGameOver(boolean gameOver) {

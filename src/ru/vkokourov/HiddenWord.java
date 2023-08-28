@@ -40,12 +40,4 @@ public class HiddenWord {
     public boolean isGuess() {
         return letters.size() == numbersOfGuessLetters.size();
     }
-
-    public List<String> getLetters() {
-        return letters;
-    }
-
-    public List<Integer> getNumbersOfGuessLetters() {
-        return numbersOfGuessLetters;
-    }
 }
