@@ -30,6 +30,13 @@ public class Game {
         state = beginState;
     }
 
+    public void startGameLoop() {
+        while (!isGameOver()) {
+            printMessage();
+            scanEnter();
+        }
+    }
+
     public void printMessage() {
         state.printMessage();
     }
@@ -42,10 +49,6 @@ public class Game {
         return getNumOfMistakes() == NUMBER_OF_TRIES;
     }
 
-    public void setGameOver(boolean gameOver) {
-        isGameOver = gameOver;
-    }
-
     public void setState(GameState state) {
         previousState = this.state;
         this.state = state;
@@ -53,6 +56,10 @@ public class Game {
 
     public boolean isGameOver() {
         return isGameOver;
+    }
+
+    public int getNumOfMistakes() {
+        return mistakes.size();
     }
 
     public BeginGameState getBeginState() {
@@ -75,7 +82,7 @@ public class Game {
         return mistakes;
     }
 
-    public int getNumOfMistakes() {
-        return mistakes.size();
+    public void setGameOver(boolean gameOver) {
+        isGameOver = gameOver;
     }
 }
