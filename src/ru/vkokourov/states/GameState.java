@@ -1,12 +1,10 @@
 package ru.vkokourov.states;
 
-import java.util.Scanner;
-
 public interface GameState {
 
     void printMessage();
 
-    void scanEnter();
+    void suggest();
 
     void validate(String enter);
 

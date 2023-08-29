@@ -1,17 +1,20 @@
 package ru.vkokourov;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class HiddenWord {
     public static final String HIDDEN = "*";
 
-    private final List<String> letters;
-    private final List<Integer> numbersOfGuessLetters;
+    private String word;
 
-    public HiddenWord() {
-        this.letters = List.of("цивилизация".split(""));
-        numbersOfGuessLetters = new ArrayList<>();
+    private final List<String> letters;
+    private final Set<Integer> numbersOfGuessLetters;
+    public HiddenWord(String word) {
+        this.word = word;
+        letters = List.of(word.split(""));
+        numbersOfGuessLetters = new HashSet<>();
     }
 
     public void print() {
@@ -25,13 +28,17 @@ public class HiddenWord {
         System.out.println();
     }
 
+    public void printWholeWord() {
+        System.out.println(word);
+    }
+
     public boolean isGuessLetter(String enter) {
         return letters.contains(enter);
     }
 
     public void addGuessLetter(String enter) {
         for (int i = 0; i < letters.size(); i++) {
-            if (enter.equals(letters.get(i)) && !numbersOfGuessLetters.contains(i)) {
+            if (enter.equals(letters.get(i))) {
                 numbersOfGuessLetters.add(i);
             }
         }
@@ -39,5 +46,9 @@ public class HiddenWord {
 
     public boolean isGuess() {
         return letters.size() == numbersOfGuessLetters.size();
+    }
+
+    public void setWord(String word) {
+        this.word = word;
     }
 }

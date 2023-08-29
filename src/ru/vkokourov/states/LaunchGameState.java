@@ -3,6 +3,7 @@ package ru.vkokourov.states;
 import ru.vkokourov.Gallows;
 import ru.vkokourov.Game;
 import ru.vkokourov.HiddenWord;
+import ru.vkokourov.WordList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,21 +12,23 @@ public class LaunchGameState implements GameState {
     private static final int NUMBER_OF_TRIES = 6;
 
     private final Game game;
+    private final WordList wordList;
     private final Gallows gallows;
     private final List<String> mistakes;
-
-    private HiddenWord word;
+    private final HiddenWord word;
 
     public LaunchGameState(Game game) {
         this.game = game;
+        wordList = new WordList();
+        word = new HiddenWord(wordList.getRandomWord());
         gallows = new Gallows();
         mistakes = new ArrayList<>();
     }
 
     @Override
     public void printMessage() {
-        if (word == null || word.isGuess() || isLastTry()) {
-            word = new HiddenWord();
+        if (word.isGuess() || isLastTry()) {
+            word.setWord(wordList.getRandomWord());
             mistakes.clear();
         }
         printGallowsAndWord();
@@ -35,7 +38,7 @@ public class LaunchGameState implements GameState {
     }
 
     @Override
-    public void scanEnter() {
+    public void suggest() {
         System.out.println("Введите букву кириллицей: ");
     }
 
@@ -70,7 +73,12 @@ public class LaunchGameState implements GameState {
 
     private void printGallowsAndWord() {
         gallows.draw(getNumOfMistakes());
-        word.print();
+        System.out.print("Слово: ");
+        if (isLastTry()) {
+            word.printWholeWord();
+        } else {
+            word.print();
+        }
     }
 
     private int getNumOfMistakes() {
@@ -80,5 +88,4 @@ public class LaunchGameState implements GameState {
     public boolean isLastTry() {
         return getNumOfMistakes() == NUMBER_OF_TRIES;
     }
-
 }

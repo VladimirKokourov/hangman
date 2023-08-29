@@ -16,7 +16,7 @@ public class QuitGameState implements GameState {
     }
 
     @Override
-    public void scanEnter() {
+    public void suggest() {
         System.out.println("Введите Т(точно) или Н(нет)");
     }
 

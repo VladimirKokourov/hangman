@@ -38,7 +38,7 @@ public class Game {
     }
 
     public void scanEnter() {
-        state.scanEnter();
+        state.suggest();
         enter = scanner.next().toLowerCase();
         validate();
     }

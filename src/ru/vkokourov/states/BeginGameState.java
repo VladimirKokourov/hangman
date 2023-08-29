@@ -16,7 +16,7 @@ public class BeginGameState implements GameState {
     }
 
     @Override
-    public void scanEnter() {
+    public void suggest() {
         System.out.println("Введите Д(да) или Н(нет)");
     }
 
