@@ -73,7 +73,12 @@ public class Game {
     }
 
     public LaunchGameState getLaunchState() {
-        return launchState == null ? new LaunchGameState(this) : launchState;
+        if (launchState == null) {
+            return new LaunchGameState(this);
+        } else {
+            launchState.prepare();
+            return launchState;
+        }
     }
 
     public QuitGameState getQuitState() {

@@ -24,7 +24,6 @@ public class QuitGameState implements GameState {
     public void validate(String enter) {
         if (!enter.matches("[тн]")) {
             System.out.println("Некорректный ввод.");
-
         }
     }
 

@@ -8,9 +8,9 @@ public class HiddenWord {
     public static final String HIDDEN = "*";
 
     private String word;
-
     private final List<String> letters;
     private final Set<Integer> numbersOfGuessLetters;
+
     public HiddenWord(String word) {
         this.word = word;
         letters = List.of(word.split(""));

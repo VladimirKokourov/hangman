@@ -15,7 +15,8 @@ public class LaunchGameState implements GameState {
     private final WordList wordList;
     private final Gallows gallows;
     private final List<String> mistakes;
-    private final HiddenWord word;
+
+    private HiddenWord word;
 
     public LaunchGameState(Game game) {
         this.game = game;
@@ -27,10 +28,6 @@ public class LaunchGameState implements GameState {
 
     @Override
     public void printMessage() {
-        if (word.isGuess() || isLastTry()) {
-            word.setWord(wordList.getRandomWord());
-            mistakes.clear();
-        }
         printGallowsAndWord();
         if (getNumOfMistakes() > 0) {
             System.out.printf("Вы уже пробовали: %s.\n", mistakes);
@@ -69,6 +66,11 @@ public class LaunchGameState implements GameState {
                 game.setState(game.getBeginState());
             }
         }
+    }
+
+    public void prepare() {
+        word = new HiddenWord(wordList.getRandomWord());
+        mistakes.clear();
     }
 
     private void printGallowsAndWord() {
