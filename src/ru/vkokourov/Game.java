@@ -9,10 +9,10 @@ import java.util.Scanner;
 
 public class Game {
 
-    private final BeginGameState beginState;
-    private final LaunchGameState launchState;
-    private final QuitGameState quitState;
     private final Scanner scanner;
+    private final BeginGameState beginState;
+    private LaunchGameState launchState;
+    private QuitGameState quitState;
     private String enter;
     private boolean isGameOver;
     private GameState previousState;
@@ -21,8 +21,6 @@ public class Game {
     public Game() {
         this.scanner = new Scanner(System.in);
         beginState = new BeginGameState(this);
-        launchState = new LaunchGameState(this);
-        quitState = new QuitGameState(this);
         isGameOver = false;
         state = beginState;
     }
@@ -75,11 +73,11 @@ public class Game {
     }
 
     public LaunchGameState getLaunchState() {
-        return launchState;
+        return launchState == null ? new LaunchGameState(this) : launchState;
     }
 
     public QuitGameState getQuitState() {
-        return quitState;
+        return quitState == null ? new QuitGameState(this) : quitState;
     }
 
     public GameState getPreviousState() {
