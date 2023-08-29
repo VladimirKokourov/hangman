@@ -3,11 +3,9 @@ package ru.vkokourov.states;
 import ru.vkokourov.Gallows;
 import ru.vkokourov.Game;
 import ru.vkokourov.HiddenWord;
-import ru.vkokourov.utils.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class LaunchGameState implements GameState {
     private static final int NUMBER_OF_TRIES = 6;
@@ -37,28 +35,29 @@ public class LaunchGameState implements GameState {
     }
 
     @Override
-    public void scanEnter(Scanner scanner) {
-        String enter;
-        do {
-            System.out.println("Введите букву кириллицей: ");
-            enter = scanner.next().toLowerCase();
-        } while (!Validator.isValidYesOrNo(enter));
+    public void scanEnter() {
+        System.out.println("Введите букву кириллицей: ");
+    }
 
+    @Override
+    public void validate(String enter) {
+        if (!enter.matches("[а-яё]")) {
+            System.out.println("Некорректный ввод.");
+            game.scanEnter();
+        }
+    }
+
+    @Override
+    public void action(String enter) {
         if (word.isGuessLetter(enter)) {
-            if (mistakes.contains(enter)) {
-                System.out.printf("Буква %s уже была", enter);
-            } else {
-                word.addGuessLetter(enter);
-            }
+            word.addGuessLetter(enter);
             if (word.isGuess()) {
                 printGallowsAndWord();
                 System.out.println("Вы выиграли! Сыграйте еще!");
                 game.setState(game.getBeginState());
             }
         } else {
-            if (mistakes.contains(enter)) {
-                System.out.printf("Буква %s уже была", enter);
-            } else {
+            if (!mistakes.contains(enter)) {
                 mistakes.add(enter);
             }
             if (isLastTry()) {

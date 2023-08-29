@@ -1,9 +1,6 @@
 package ru.vkokourov.states;
 
-import java.util.Scanner;
-
 import ru.vkokourov.Game;
-import ru.vkokourov.utils.Validator;
 
 public class QuitGameState implements GameState {
 
@@ -15,18 +12,25 @@ public class QuitGameState implements GameState {
 
     @Override
     public void printMessage() {
-        System.out.println("Вы уверены, что хотите выйти? ");
+        System.out.println("Вы точно уверены, что хотите выйти? ");
     }
 
     @Override
-    public void scanEnter(Scanner scanner) {
-        String enter;
-        do {
-            System.out.println("Введите Y или N");
-            enter = scanner.next().toLowerCase();
-        } while (Validator.isValidYesOrNo(enter));
+    public void scanEnter() {
+        System.out.println("Введите Т(точно) или Н(нет)");
+    }
 
-        if (enter.equals("y")) {
+    @Override
+    public void validate(String enter) {
+        if (!enter.matches("[тн]")) {
+            System.out.println("Некорректный ввод.");
+
+        }
+    }
+
+    @Override
+    public void action(String enter) {
+        if (enter.equals("т")) {
             game.setGameOver(true);
         } else {
             game.setState(game.getPreviousState());

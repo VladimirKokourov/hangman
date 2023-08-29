@@ -31,7 +31,7 @@ public class HiddenWord {
 
     public void addGuessLetter(String enter) {
         for (int i = 0; i < letters.size(); i++) {
-            if (enter.equals(letters.get(i))) {
+            if (enter.equals(letters.get(i)) && !numbersOfGuessLetters.contains(i)) {
                 numbersOfGuessLetters.add(i);
             }
         }

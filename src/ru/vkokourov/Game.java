@@ -1,19 +1,19 @@
 package ru.vkokourov;
 
-import ru.vkokourov.states.*;
+import ru.vkokourov.states.BeginGameState;
+import ru.vkokourov.states.GameState;
+import ru.vkokourov.states.LaunchGameState;
+import ru.vkokourov.states.QuitGameState;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Game {
 
-    private Scanner scanner;
-
     private final BeginGameState beginState;
     private final LaunchGameState launchState;
     private final QuitGameState quitState;
-
+    private final Scanner scanner;
+    private String enter;
     private boolean isGameOver;
     private GameState previousState;
     private GameState state;
@@ -31,15 +31,30 @@ public class Game {
         while (!isGameOver()) {
             printMessage();
             scanEnter();
+            action();
         }
     }
 
-    public void printMessage() {
+    private void printMessage() {
         state.printMessage();
     }
 
     public void scanEnter() {
-        state.scanEnter(scanner);
+        state.scanEnter();
+        enter = scanner.next().toLowerCase();
+        validate();
+    }
+
+    private void validate() {
+        if (enter.length() > 1) {
+            System.out.println("Введено больше одного символа.");
+            scanEnter();
+        }
+        state.validate(enter);
+    }
+
+    private void action() {
+        state.action(enter);
     }
 
     public void setState(GameState state) {
@@ -49,6 +64,10 @@ public class Game {
 
     public boolean isGameOver() {
         return isGameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        isGameOver = gameOver;
     }
 
     public BeginGameState getBeginState() {
@@ -65,9 +84,5 @@ public class Game {
 
     public GameState getPreviousState() {
         return previousState;
-    }
-
-    public void setGameOver(boolean gameOver) {
-        isGameOver = gameOver;
     }
 }

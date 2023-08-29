@@ -1,9 +1,6 @@
 package ru.vkokourov.states;
 
-import java.util.Scanner;
-
 import ru.vkokourov.Game;
-import ru.vkokourov.utils.Validator;
 
 public class BeginGameState implements GameState {
 
@@ -19,14 +16,21 @@ public class BeginGameState implements GameState {
     }
 
     @Override
-    public void scanEnter(Scanner scanner) {
-        String enter;
-        do {
-            System.out.println("Введите Y или N");
-            enter = scanner.next().toLowerCase();
-        } while (!Validator.isValidYesOrNo(enter));
+    public void scanEnter() {
+        System.out.println("Введите Д(да) или Н(нет)");
+    }
 
-        if (enter.equals("y")) {
+    @Override
+    public void validate(String enter) {
+        if (!enter.matches("[дн]")) {
+            System.out.println("Некорректный ввод.");
+            game.scanEnter();
+        }
+    }
+
+    @Override
+    public void action(String enter) {
+        if (enter.equals("д")) {
             game.setState(game.getLaunchState());
         } else {
             game.setState(game.getQuitState());

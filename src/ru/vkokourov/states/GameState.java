@@ -6,5 +6,9 @@ public interface GameState {
 
     void printMessage();
 
-    void scanEnter(Scanner scanner);
+    void scanEnter();
+
+    void validate(String enter);
+
+    void action(String enter);
 }
