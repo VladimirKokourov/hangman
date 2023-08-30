@@ -36,12 +36,12 @@ public class LaunchGameState implements GameState {
 
     @Override
     public void suggest() {
-        System.out.println("Введите букву кириллицей: ");
+        System.out.println("Введите букву кириллицей:   Для выхода введите Q");
     }
 
     @Override
     public void validate(String enter) {
-        if (!enter.matches("[а-яё]")) {
+        if (!enter.matches("[а-яёq]")) {
             System.out.println("Некорректный ввод.");
             game.scanEnter();
         }
@@ -49,7 +49,9 @@ public class LaunchGameState implements GameState {
 
     @Override
     public void action(String enter) {
-        if (word.isGuessLetter(enter)) {
+        if (enter.equals("q")) {
+            game.setState(game.getQuitState());
+        } else if (word.isGuessLetter(enter)) {
             word.addGuessLetter(enter);
             if (word.isGuess()) {
                 printGallowsAndWord();
