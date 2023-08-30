@@ -21,13 +21,12 @@ public class ChooseModeGameState implements GameState {
         System.out.println("Выберите сложность игры:");
         System.out.println("1) Легко (слова с длиной до 5 букв)");
         System.out.println("2) Нормально (слова с длиной от 6 до 8 букв)");
-        System.out.println("3) Жесткач (слова с длиной от 9 букв)");
-        System.out.println();
+        System.out.println("3) Жесткач (слова с длиной от 9 букв)\n");
     }
 
     @Override
     public void suggest() {
-        System.out.println("Введите цифру от 1 до 3:");
+        System.out.println("Введите цифру от (1), (2) или (3):");
     }
 
     @Override

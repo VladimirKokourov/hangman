@@ -5,6 +5,7 @@ import ru.vkokourov.game.Game;
 public class QuitGameState implements GameState {
 
     private static final String REGEX_SURE_OR_NO = "[тн]";
+    private static final String SYMBOL_SURE = "т";
 
     private final Game game;
 
@@ -14,12 +15,12 @@ public class QuitGameState implements GameState {
 
     @Override
     public void printMessage() {
-        System.out.println("Вы точно уверены, что хотите выйти? ");
+        System.out.println("Вы точно уверены, что хотите выйти?\n");
     }
 
     @Override
     public void suggest() {
-        System.out.println("Введите Т(точно) или Н(нет)");
+        System.out.println("Введите (Т) точно или (Н) нет");
     }
 
     @Override
@@ -32,7 +33,7 @@ public class QuitGameState implements GameState {
 
     @Override
     public void action(String enter) {
-        if (enter.equals("т")) {
+        if (enter.equals(SYMBOL_SURE)) {
             game.setGameOver(true);
         } else {
             game.setState(game.getPreviousState());

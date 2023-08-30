@@ -10,8 +10,8 @@ public class Game {
     private final BeginGameState beginState;
 
     private ChooseModeGameState chooseModeState;
-
     private LaunchGameState launchState;
+    private MenuGameState menuGameState;
     private QuitGameState quitState;
     private String enter;
     private boolean isGameOver;
@@ -69,25 +69,38 @@ public class Game {
         isGameOver = gameOver;
     }
 
-    public ChooseModeGameState getChooseModeState() {
-        return chooseModeState == null ? new ChooseModeGameState(this) : chooseModeState;
-    }
-
     public BeginGameState getBeginState() {
         return beginState;
     }
 
+    public ChooseModeGameState getChooseModeState() {
+        if (chooseModeState == null) {
+            chooseModeState = new ChooseModeGameState(this);
+        }
+        return chooseModeState;
+    }
+
     public LaunchGameState getLaunchState() {
         if (launchState == null) {
-            return new LaunchGameState(this);
-        } else {
+            launchState = new LaunchGameState(this);
+        } else if (state.equals(chooseModeState)) {
             launchState.prepare();
-            return launchState;
         }
+        return launchState;
+    }
+
+    public MenuGameState getMenuGameState() {
+        if (menuGameState == null) {
+            menuGameState = new MenuGameState(this);
+        }
+        return menuGameState;
     }
 
     public QuitGameState getQuitState() {
-        return quitState == null ? new QuitGameState(this) : quitState;
+        if (quitState == null) {
+            quitState = new QuitGameState(this);
+        }
+        return quitState;
     }
 
     public GameState getPreviousState() {

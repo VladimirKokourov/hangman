@@ -5,7 +5,7 @@ import ru.vkokourov.game.Game;
 public class BeginGameState implements GameState {
 
     private static final String REGEX_YES_OR_NO = "[дн]";
-    private static final String ANSWER_YES = "д";
+    private static final String SYMBOL_YES = "д";
 
     private final Game game;
 
@@ -15,12 +15,12 @@ public class BeginGameState implements GameState {
 
     @Override
     public void printMessage() {
-        System.out.println("Угадай слово или тебя ждет ВИСИЛИЦА! Начать игру?");
+        System.out.println("Угадай слово или тебя ждет ВИСИЛИЦА! Начать игру?\n");
     }
 
     @Override
     public void suggest() {
-        System.out.println("Введите Д(да) или Н(нет):");
+        System.out.println("Введите (Д) да или (Н) нет:");
     }
 
     @Override
@@ -33,7 +33,7 @@ public class BeginGameState implements GameState {
 
     @Override
     public void action(String enter) {
-        if (enter.equals(ANSWER_YES)) {
+        if (enter.equals(SYMBOL_YES)) {
             game.setState(game.getChooseModeState());
         } else {
             game.setState(game.getQuitState());

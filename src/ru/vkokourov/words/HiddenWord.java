@@ -48,4 +48,13 @@ public class HiddenWord {
     public boolean isGuessedWord() {
         return letters.size() == numbersOfGuessLetters.size();
     }
+
+    public String getFirstHiddenLetter() {
+        for (int i = 0; i < word.length(); i++) {
+            if (!numbersOfGuessLetters.contains(i)) {
+                return letters.get(i);
+            }
+        }
+        return null;
+    }
 }
