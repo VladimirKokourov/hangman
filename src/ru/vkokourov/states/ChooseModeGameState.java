@@ -6,6 +6,9 @@ import ru.vkokourov.game.GameMode;
 public class ChooseModeGameState implements GameState {
 
     private static final String REGEX_NUMS = "[123]";
+    private static final String SYMBOL_FOR_EASY = "1";
+    private static final String SYMBOL_FOR_NORMAL = "2";
+    private static final String SYMBOL_FOR_HARD = "3";
 
     private final Game game;
 
@@ -19,6 +22,7 @@ public class ChooseModeGameState implements GameState {
         System.out.println("1) Легко (слова с длиной до 5 букв)");
         System.out.println("2) Нормально (слова с длиной от 6 до 8 букв)");
         System.out.println("3) Жесткач (слова с длиной от 9 букв)");
+        System.out.println();
     }
 
     @Override
@@ -37,13 +41,13 @@ public class ChooseModeGameState implements GameState {
     @Override
     public void action(String enter) {
         switch (enter) {
-            case "1":
+            case SYMBOL_FOR_EASY:
                 game.setGameMode(GameMode.EASY);
                 break;
-            case "2":
+            case SYMBOL_FOR_NORMAL:
                 game.setGameMode(GameMode.MEDIUM);
                 break;
-            case "3":
+            case SYMBOL_FOR_HARD:
                 game.setGameMode(GameMode.HARD);
                 break;
         }
