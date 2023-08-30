@@ -11,8 +11,9 @@ import java.util.Set;
 public class LaunchGameState implements GameState {
 
     private static final int NUMBER_OF_TRIES = 6;
+    private static final String RESTART_SYMBOL = "r";
     private static final String QUIT_SYMBOL = "q";
-    private static final String REGEX_LETTERS = "[а-яё" + QUIT_SYMBOL + "]";
+    private static final String REGEX_LETTERS = "[а-яё" + RESTART_SYMBOL + QUIT_SYMBOL + "]";
 
     private final Game game;
     private final WordList wordList;
@@ -39,7 +40,7 @@ public class LaunchGameState implements GameState {
 
     @Override
     public void suggest() {
-        System.out.println("Введите букву кириллицей или Q для выхода из игры.");
+        System.out.println("Введите букву кириллицей или r чтобы начать сначала, q для выхода из игры.");
     }
 
     @Override
@@ -52,7 +53,9 @@ public class LaunchGameState implements GameState {
 
     @Override
     public void action(String enter) {
-        if (enter.equals(QUIT_SYMBOL)) {
+        if (enter.equals(RESTART_SYMBOL)) {
+            game.setState(game.getBeginState());
+        } else if (enter.equals(QUIT_SYMBOL)) {
             game.setState(game.getQuitState());
         } else if (word.isGuessLetter(enter)) {
             word.addGuessLetter(enter);
