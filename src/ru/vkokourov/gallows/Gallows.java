@@ -1,4 +1,4 @@
-package ru.vkokourov;
+package ru.vkokourov.gallows;
 
 public class Gallows {
 

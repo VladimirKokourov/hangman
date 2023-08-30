@@ -1,9 +1,9 @@
 package ru.vkokourov.states;
 
-import ru.vkokourov.Gallows;
-import ru.vkokourov.Game;
-import ru.vkokourov.HiddenWord;
-import ru.vkokourov.WordList;
+import ru.vkokourov.gallows.Gallows;
+import ru.vkokourov.game.Game;
+import ru.vkokourov.words.HiddenWord;
+import ru.vkokourov.words.WordList;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,9 +24,9 @@ public class LaunchGameState implements GameState {
     public LaunchGameState(Game game) {
         this.game = game;
         wordList = new WordList();
-        word = new HiddenWord(wordList.getRandomWord());
         gallows = new Gallows();
         mistakes = new HashSet<>();
+        prepare();
     }
 
     @Override
@@ -58,7 +58,7 @@ public class LaunchGameState implements GameState {
             word.addGuessLetter(enter);
             if (word.isGuessedWord()) {
                 printGallowsAndWord();
-                System.out.println("Вы выиграли! Сыграйте еще!");
+                System.out.println("Мои поздравления! Вы угадали!");
                 game.setState(game.getBeginState());
             }
         } else {
@@ -72,7 +72,17 @@ public class LaunchGameState implements GameState {
     }
 
     public void prepare() {
-        word = new HiddenWord(wordList.getRandomWord());
+        switch (game.getGameMode()) {
+            case EASY:
+                word = new HiddenWord(wordList.getRandomWord(0, 5));
+                break;
+            case MEDIUM:
+                word = new HiddenWord(wordList.getRandomWord(6, 8));
+                break;
+            case HARD:
+                word = new HiddenWord(wordList.getRandomWord(9, 30));
+                break;
+        }
         mistakes.clear();
     }
 

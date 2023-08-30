@@ -1,6 +1,6 @@
 package ru.vkokourov.states;
 
-import ru.vkokourov.Game;
+import ru.vkokourov.game.Game;
 
 public class QuitGameState implements GameState {
 

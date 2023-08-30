@@ -1,4 +1,4 @@
-package ru.vkokourov;
+package ru.vkokourov.words;
 
 import java.util.HashSet;
 import java.util.List;

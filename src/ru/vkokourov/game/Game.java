@@ -1,9 +1,6 @@
-package ru.vkokourov;
+package ru.vkokourov.game;
 
-import ru.vkokourov.states.BeginGameState;
-import ru.vkokourov.states.GameState;
-import ru.vkokourov.states.LaunchGameState;
-import ru.vkokourov.states.QuitGameState;
+import ru.vkokourov.states.*;
 
 import java.util.Scanner;
 
@@ -12,12 +9,15 @@ public class Game {
     private final Scanner scanner;
     private final BeginGameState beginState;
 
+    private ChooseModeGameState chooseModeState;
+
     private LaunchGameState launchState;
     private QuitGameState quitState;
     private String enter;
     private boolean isGameOver;
     private GameState previousState;
     private GameState state;
+    private GameMode gameMode;
 
     public Game() {
         this.scanner = new Scanner(System.in);
@@ -69,6 +69,10 @@ public class Game {
         isGameOver = gameOver;
     }
 
+    public ChooseModeGameState getChooseModeState() {
+        return chooseModeState == null ? new ChooseModeGameState(this) : chooseModeState;
+    }
+
     public BeginGameState getBeginState() {
         return beginState;
     }
@@ -88,5 +92,13 @@ public class Game {
 
     public GameState getPreviousState() {
         return previousState;
+    }
+
+    public GameMode getGameMode() {
+        return gameMode;
+    }
+
+    public void setGameMode(GameMode gameMode) {
+        this.gameMode = gameMode;
     }
 }

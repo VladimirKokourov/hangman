@@ -1,10 +1,11 @@
 package ru.vkokourov.states;
 
-import ru.vkokourov.Game;
+import ru.vkokourov.game.Game;
 
 public class BeginGameState implements GameState {
 
     private static final String REGEX_YES_OR_NO = "[дн]";
+    private static final String ANSWER_YES = "д";
 
     private final Game game;
 
@@ -14,12 +15,12 @@ public class BeginGameState implements GameState {
 
     @Override
     public void printMessage() {
-        System.out.println("Начать игру?");
+        System.out.println("Угадай слово или тебя ждет ВИСИЛИЦА! Начать игру?");
     }
 
     @Override
     public void suggest() {
-        System.out.println("Введите Д(да) или Н(нет)");
+        System.out.println("Введите Д(да) или Н(нет):");
     }
 
     @Override
@@ -32,8 +33,8 @@ public class BeginGameState implements GameState {
 
     @Override
     public void action(String enter) {
-        if (enter.equals("д")) {
-            game.setState(game.getLaunchState());
+        if (enter.equals(ANSWER_YES)) {
+            game.setState(game.getChooseModeState());
         } else {
             game.setState(game.getQuitState());
         }
