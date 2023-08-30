@@ -15,7 +15,7 @@ public class BeginGameState implements GameState {
 
     @Override
     public void printMessage() {
-        System.out.println("Угадай слово или тебя ждет ВИСИЛИЦА! Начать игру?\n");
+        System.out.println("Угадай слово или тебя ждет ВИСЕЛИЦА! Начать игру?\n");
     }
 
     @Override
