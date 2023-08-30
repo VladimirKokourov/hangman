@@ -4,6 +4,8 @@ import ru.vkokourov.Game;
 
 public class BeginGameState implements GameState {
 
+    private static final String REGEX_YES_OR_NO = "[дн]";
+
     private final Game game;
 
     public BeginGameState(Game game) {
@@ -22,7 +24,7 @@ public class BeginGameState implements GameState {
 
     @Override
     public void validate(String enter) {
-        if (!enter.matches("[дн]")) {
+        if (!enter.matches(REGEX_YES_OR_NO)) {
             System.out.println("Некорректный ввод.");
             game.scanEnter();
         }

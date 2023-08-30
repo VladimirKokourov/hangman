@@ -5,9 +5,10 @@ import java.util.List;
 import java.util.Set;
 
 public class HiddenWord {
+
     public static final String HIDDEN = "*";
 
-    private String word;
+    private final String word;
     private final List<String> letters;
     private final Set<Integer> numbersOfGuessLetters;
 
@@ -17,7 +18,7 @@ public class HiddenWord {
         numbersOfGuessLetters = new HashSet<>();
     }
 
-    public void print() {
+    public void printHiddenWord() {
         for (int i = 0; i < letters.size(); i++) {
             if (numbersOfGuessLetters.contains(i)) {
                 System.out.print(letters.get(i));
@@ -28,7 +29,7 @@ public class HiddenWord {
         System.out.println();
     }
 
-    public void printWholeWord() {
+    public void printWord() {
         System.out.println(word);
     }
 
@@ -44,11 +45,7 @@ public class HiddenWord {
         }
     }
 
-    public boolean isGuess() {
+    public boolean isGuessedWord() {
         return letters.size() == numbersOfGuessLetters.size();
-    }
-
-    public void setWord(String word) {
-        this.word = word;
     }
 }

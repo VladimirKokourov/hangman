@@ -11,6 +11,7 @@ public class Game {
 
     private final Scanner scanner;
     private final BeginGameState beginState;
+
     private LaunchGameState launchState;
     private QuitGameState quitState;
     private String enter;

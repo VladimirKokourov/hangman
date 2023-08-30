@@ -4,6 +4,8 @@ import ru.vkokourov.Game;
 
 public class QuitGameState implements GameState {
 
+    private static final String REGEX_SURE_OR_NO = "[тн]";
+
     private final Game game;
 
     public QuitGameState(Game game) {
@@ -22,8 +24,9 @@ public class QuitGameState implements GameState {
 
     @Override
     public void validate(String enter) {
-        if (!enter.matches("[тн]")) {
+        if (!enter.matches(REGEX_SURE_OR_NO)) {
             System.out.println("Некорректный ввод.");
+            game.scanEnter();
         }
     }
 
